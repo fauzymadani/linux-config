@@ -1,0 +1,24 @@
+add-highlighter global/ number-lines
+colorscheme gruvbox-dark
+
+eval %sh{kak-lsp --kakoune -s $kak_session}
+hook global WinSetOption filetype=(rust|python|javascript|...) %{
+    lsp-enable-window
+}
+
+
+hook global InsertChar \t %{ exec -draft -itersel h@ }
+set global tabstop 2
+set global indentwidth 2
+
+source "%val{config}/plugins/plug.kak/rc/plug.kak"
+plug "andreyorst/plug.kak" noload
+
+plug "andreyorst/powerline.kak" defer powerline_gruvbox %{
+    powerline-theme gruvbox
+} config %{
+    powerline-start
+}
+
+
+
